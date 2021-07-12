@@ -40,7 +40,18 @@ function aesDecrypt(content, key = Key, iv = Iv) {
   return decrypted
 }
 
+// 自定义规则生成新密码
+function encrypt(pwd) {
+  return md5(md5(pwd).substr(2, 7) + md5(pwd))
+}
+
+// 创建md5算法
+function md5(pwd) {
+  return crypto.createHash('md5').update(pwd).digest('base64')
+}
+
 module.exports = {
   aesEncrypt,
   aesDecrypt,
+  encrypt,
 }

@@ -1,6 +1,5 @@
 const userCrud = require('../../models/user/user')
 const userInfoCrud = require('../../models/user-info/user-info')
-const { aesEncrypt, aesDecrypt } = require('../../utils/crypt')
 
 class User {
   constructor() {
@@ -10,32 +9,21 @@ class User {
   }
   // 用户注册中间件
   async register(req, res, next) {
-    let username = req.body.username
-    let password = aesEncrypt(req.body.password)
-    const result = await userCrud.findOne({ username: username })
-    console.log(result)
-    if (result) {
+    let { username, password } = req.body
+    const createResult = await userCrud.create({
+      username: username,
+      password: password,
+    })
+    if (createResult) {
       res.send({
-        code: 404,
-        message: '该用户已经存在',
+        code: 200,
+        message: '用户注册成功',
       })
     } else {
-      const newUser = {
-        username: username,
-        password: password,
-      }
-      const createResult = await userCrud.create(newUser)
-      if (createResult) {
-        res.send({
-          code: 200,
-          message: '用户注册成功',
-        })
-      } else {
-        res.send({
-          code: 404,
-          message: '用户注册失败',
-        })
-      }
+      res.send({
+        code: 404,
+        message: '用户注册失败',
+      })
     }
   }
   // 用户登录中间件
