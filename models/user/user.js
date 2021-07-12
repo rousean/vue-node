@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const mongoCrud = require('../../db/mongoose/mongoCrud')
+const mongoCrud = require('../../db/mongoose/mongo-crud')
 
 const Schema = mongoose.Schema
 
@@ -10,22 +10,6 @@ const userSchema = new Schema({
     required: true,
   },
   password: {
-    type: String,
-    required: true,
-  },
-  roles: {
-    type: [String],
-    required: true,
-  },
-  introduction: {
-    type: String,
-    required: true,
-  },
-  avatar: {
-    type: String,
-    required: true,
-  },
-  name: {
     type: String,
     required: true,
   },

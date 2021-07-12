@@ -6,6 +6,8 @@ const User = require('../controller/user/user')
 router.get('/', function (req, res, next) {
   res.send('respond with a resource')
 })
+// 用户注册接口
+router.post('/register', User.register)
 
 // 登录接口
 router.post('/login', User.login)

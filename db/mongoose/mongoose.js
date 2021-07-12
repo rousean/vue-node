@@ -2,8 +2,9 @@
 const mongoose = require('mongoose')
 // 引入配置
 const config = require('config-lite')
-// 引入告警
+// 引入告警模式
 const chalk = require('chalk')
+
 mongoose.connect(config.mongodb, {
   autoIndex: false,
   useNewUrlParser: true,

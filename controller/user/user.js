@@ -1,9 +1,42 @@
-const userCrud = require('../../models/user/userModel')
+const userCrud = require('../../models/user/user')
+const userInfoCrud = require('../../models/user-info/user-info')
+const { aesEncrypt, aesDecrypt } = require('../../utils/crypt')
 
 class User {
   constructor() {
+    this.register = this.register.bind(this)
     this.login = this.login.bind(this)
     this.getUserInfo = this.getUserInfo.bind(this)
+  }
+  // 用户注册中间件
+  async register(req, res, next) {
+    let username = req.body.username
+    let password = aesEncrypt(req.body.password)
+    const result = await userCrud.findOne({ username: username })
+    console.log(result)
+    if (result) {
+      res.send({
+        code: 404,
+        message: '该用户已经存在',
+      })
+    } else {
+      const newUser = {
+        username: username,
+        password: password,
+      }
+      const createResult = await userCrud.create(newUser)
+      if (createResult) {
+        res.send({
+          code: 200,
+          message: '用户注册成功',
+        })
+      } else {
+        res.send({
+          code: 404,
+          message: '用户注册失败',
+        })
+      }
+    }
   }
   // 用户登录中间件
   async login(req, res, next) {
@@ -33,7 +66,7 @@ class User {
   async getUserInfo(req, res, next) {
     let token = req.query.token
     token = token.split('-')[0]
-    const result = await userCrud.findOne(
+    const result = await userInfoCrud.findOne(
       { username: token },
       {
         roles: 1,
