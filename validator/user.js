@@ -9,8 +9,8 @@ exports.register = validate([
     .custom(async username => {
       const user = await userCrud.findOne({ username })
       if (user) {
-        return Promise.reject('用户名已经存在！')
+        return Promise.reject('用户名已经存在!')
       }
     }),
-  body('password').notEmpty().withMessage('密码不能为空！'),
+  body('password').notEmpty().withMessage('密码不能为空!'),
 ])

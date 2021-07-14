@@ -17,12 +17,12 @@ class User {
     if (createResult) {
       res.send({
         code: 200,
-        message: '用户注册成功',
+        message: '用户注册成功!',
       })
     } else {
       res.send({
         code: 404,
-        message: '用户注册失败',
+        message: '用户注册失败!',
       })
     }
   }

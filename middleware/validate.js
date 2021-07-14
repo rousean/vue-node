@@ -7,6 +7,11 @@ module.exports = validations => {
     if (errors.isEmpty()) {
       return next()
     }
-    res.status(400).json({ errors: errors.array() })
+    const [{ msg }] = errors.errors
+    // res.status(404).json({ errors: errors.array() })
+    res.send({
+      code: 404,
+      message: msg,
+    })
   }
 }
