@@ -41,7 +41,7 @@ function aesDecrypt(content, key = Key, iv = Iv) {
 }
 
 // 自定义规则生成新密码
-function encrypt(pwd) {
+function myCrypt(pwd) {
   return md5(md5(pwd).substr(2, 7) + md5(pwd))
 }
 
@@ -53,5 +53,5 @@ function md5(pwd) {
 module.exports = {
   aesEncrypt,
   aesDecrypt,
-  encrypt,
+  myCrypt,
 }

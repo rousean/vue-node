@@ -10,10 +10,7 @@ class User {
   // 用户注册中间件
   async register(req, res, next) {
     let { username, password } = req.body
-    const createResult = await userCrud.create({
-      username: username,
-      password: password,
-    })
+    const createResult = await userCrud.create({ username, password })
     if (createResult) {
       res.send({
         code: 200,
@@ -28,27 +25,13 @@ class User {
   }
   // 用户登录中间件
   async login(req, res, next) {
-    let username = req.body.username
-    let password = req.body.password
-    const token = username + '-token'
-    const result = await userCrud.findOne(
-      { username: username },
-      { username: 1, password: 1, _id: 0 }
-    )
-    if (result) {
-      if (result.password === password) {
-        res.send({
-          code: 20000,
-          data: {
-            token: token,
-          },
-        })
-      } else {
-        res.send({ code: 60204, message: '用户名密码不正确！' })
-      }
-    } else {
-      res.send({ code: 60205, message: '用户名不存在！' })
-    }
+    const token = '-token'
+    res.send({
+      code: 200,
+      data: {
+        token: token,
+      },
+    })
   }
   // 获取用户信息中间件
   async getUserInfo(req, res, next) {

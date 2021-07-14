@@ -1,22 +1,20 @@
 #!/usr/bin/env node
-
 // 依赖模块
-var app = require('../app')
-var debug = require('debug')('vue-node:server')
-var http = require('http')
+const debug = require('debug')('vue-node:server')
+const http = require('http')
 const config = require('config-lite')
+const chalk = require('chalk')
+
 const utils = require('../utils/normalize-port')
+const app = require('../app')
 
-// 设置端口
-var port = utils.normalizePort(process.env.PORT || config.port)
-app.set('port', port)
+let port = utils.normalizePort(process.env.PORT || config.port)
+app.set('port', port) // 设置端口
 
-// 创建Create HTTP server
-var server = http.createServer(app)
+const server = http.createServer(app) // 创建Create HTTP server
 
-// 在所有网络接口上侦听提供的端口
 server.listen(port, () => {
-  console.log(`后台服务开启在${port}端口`)
+  console.log(chalk.red(`后台服务开启在${port}端口!`)) // 在所有网络接口上侦听提供的端口
 })
 
 server.on('error', function onError(error) {

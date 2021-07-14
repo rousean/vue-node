@@ -1,4 +1,3 @@
-const createError = require('http-errors')
 const express = require('express')
 const path = require('path')
 const cookieParser = require('cookie-parser')
@@ -6,7 +5,7 @@ const logger = require('morgan')
 const cors = require('cors')
 
 // 自定义中间件
-const mongodb = require('./db/mongoose/mongoose')
+require('./db/mongoose/mongoose')
 const notFound = require('./error/not-found')
 const error = require('./error/error')
 const router = require('./routes/index')

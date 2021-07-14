@@ -12,7 +12,7 @@ router.get('/', function (req, res, next) {
 router.post('/register', userValidator.register, User.register)
 
 // 登录接口
-router.post('/login', User.login)
+router.post('/login', userValidator.login, User.login)
 
 // 用户信息接口
 router.get('/info', User.getUserInfo)

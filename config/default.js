@@ -1,7 +1,7 @@
 'use strict'
 
 // 全局配置
-let config = {
+const config = {
   port: '3000',
   mongodb: 'mongodb://localhost:27017/vue',
   mysql: {

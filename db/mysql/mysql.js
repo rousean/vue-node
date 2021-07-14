@@ -3,7 +3,11 @@ let mysql = require('mysql')
 // 引入数据库的配置
 const config = require('config-lite')
 
-// sql语句，sql语句中需要的数据
+/**
+ * @param {*} sql sql语句
+ * @param {*} params sql语句中需要的数据
+ * @returns
+ */
 function query(sql, params) {
   let conn = mysql.createConnection(config.mysql)
   return new Promise((resolve, reject) => {

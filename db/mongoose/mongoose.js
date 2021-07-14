@@ -1,19 +1,18 @@
-// 引入mongoose
-const mongoose = require('mongoose')
-// 引入配置
-const config = require('config-lite')
-// 引入告警模式
-const chalk = require('chalk')
+const mongoose = require('mongoose') // 引入mongoose
+const config = require('config-lite') // 引入配置
+const chalk = require('chalk') // 引入告警模式
 
 mongoose.connect(config.mongodb, {
   autoIndex: false,
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
+
 mongoose.Promise = global.Promise
-var mongodb = mongoose.connection
+
+let mongodb = mongoose.connection
 mongodb.once('open', () => {
-  console.log(chalk.green('连接数据库成功'))
+  console.log(chalk.green('连接数据库成功!'))
 })
 
 mongodb.on('error', function (error) {
@@ -22,7 +21,7 @@ mongodb.on('error', function (error) {
 })
 
 mongodb.on('close', function () {
-  console.log(chalk.red('数据库断开，重新连接数据库'))
+  console.log(chalk.red('数据库断开,重新连接数据库!'))
   mongoose.connect(config.url, { server: { auto_reconnect: true } })
 })
 

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const mongoCrud = require('../../db/mongoose/mongo-crud')
-const { encrypt } = require('../../utils/crypt')
+const { myCrypt } = require('../../utils/crypt')
 const Schema = mongoose.Schema
 
 // 定义schema
@@ -12,7 +12,7 @@ const userSchema = new Schema({
   password: {
     type: String,
     required: true,
-    set: v => encrypt(v),
+    set: v => myCrypt(v),
   },
 })
 

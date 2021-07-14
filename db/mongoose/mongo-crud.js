@@ -1,7 +1,7 @@
 // 二次封装mongodb增删改查方法
 class mongoCrud {
   /**
-   * 子类构造传入对应的 Model 类
+   * 子类构造传入对应的Model类
    * @param Model
    */
   constructor(Model) {
@@ -9,7 +9,7 @@ class mongoCrud {
   }
 
   /**
-   * 使用 Model 的 静态方法 create() 添加 doc
+   * 使用Model的静态方法create()添加doc
    * @param obj 构造实体的对象
    * @returns {Promise}
    */
@@ -26,7 +26,7 @@ class mongoCrud {
   }
 
   /**
-   * 使用 Model save() 添加 doc
+   * 使用Model save()添加doc
    * @param obj 构造实体的对象
    * @returns {Promise}
    */
@@ -44,7 +44,7 @@ class mongoCrud {
   }
 
   /**
-   * 使用 Model insertMany() 添加多个 doc
+   * 使用Model insertMany()添加多个doc
    * @param objs 构造实体的对象
    * @returns {Promise}
    */
@@ -79,7 +79,7 @@ class mongoCrud {
   }
 
   /**
-   * 查找符合条件的第一条 doc
+   * 查找符合条件的第一条doc
    * @param condition
    * @param constraints
    * @returns {Promise}
