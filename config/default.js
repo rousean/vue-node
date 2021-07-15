@@ -11,6 +11,7 @@ const config = {
     user: 'root', // 数据库用户名
     password: '', // 数据库密码
   },
+  jwtSecret: '710867a9-855e-419c-94bf-be93fc3bbbb8',
 }
 
 module.exports = config

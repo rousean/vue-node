@@ -61,6 +61,23 @@ class mongoCrud {
   }
 
   /**
+   * 用id查询
+   * @param {_id} id id属性
+   * @returns {Promise}
+   */
+  findById(id) {
+    return new Promise((resolve, reject) => {
+      this.Model.findById(id, (error, result) => {
+        if (error) {
+          reject(error)
+        } else {
+          resolve(result)
+        }
+      })
+    })
+  }
+
+  /**
    * 查询所有符合条件docs
    * @param condition 查找条件
    * @param constraints

@@ -1,7 +1,7 @@
 const { body } = require('express-validator')
 const validate = require('../middleware/validate')
 const userCrud = require('../models/user/user')
-const { myCrypt } = require('../utils/crypt')
+const { myCrypt } = require('../util/crypt')
 
 exports.register = [
   validate([
@@ -25,7 +25,7 @@ exports.login = [
   ]),
   validate([
     body('username').custom(async (username, { req }) => {
-      const result = await userCrud.findOne({ username }, { username: 1, password: 1, _id: 0 })
+      const result = await userCrud.findOne({ username }, { username: 1, password: 1, _id: 1 })
       if (result) {
         req.result = result // 将数据挂载到请求对象中，后续的中间件也可以使用
       } else {

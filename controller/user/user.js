@@ -1,5 +1,7 @@
 const userCrud = require('../../models/user/user')
 const userInfoCrud = require('../../models/user-info/user-info')
+const jwt = require('../../util/jwt')
+const config = require('config-lite')
 
 class User {
   constructor() {
@@ -25,29 +27,29 @@ class User {
   }
   // 用户登录中间件
   async login(req, res, next) {
-    const token = '-token'
-    res.send({
-      code: 200,
-      data: {
-        token: token,
-      },
-    })
+    try {
+      console.log(req.result)
+      const token = await jwt.sign(
+        {
+          userId: req.result._id,
+        },
+        config.jwtSecret,
+        { expiresIn: 60 * 60 }
+      )
+      res.status(200).json({ token })
+      // res.send({
+      //   code: 200,
+      //   data: {
+      //     token: token,
+      //   },
+      // })
+    } catch (error) {
+      next(error)
+    }
   }
   // 获取用户信息中间件
   async getUserInfo(req, res, next) {
-    let token = req.query.token
-    token = token.split('-')[0]
-    const result = await userInfoCrud.findOne(
-      { username: token },
-      {
-        roles: 1,
-        introduction: 1,
-        avatar: 1,
-        name: 1,
-        _id: 0,
-      }
-    )
-    res.send({ code: 20000, data: result })
+    res.send({ code: 20000 })
   }
 }
 

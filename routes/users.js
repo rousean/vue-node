@@ -3,6 +3,7 @@ const router = express.Router()
 const User = require('../controller/user/user')
 
 const userValidator = require('../validator/user')
+const auth = require('../middleware/auth')
 
 // 获取users路由监听
 router.get('/', function (req, res, next) {
@@ -15,6 +16,6 @@ router.post('/register', userValidator.register, User.register)
 router.post('/login', userValidator.login, User.login)
 
 // 用户信息接口
-router.get('/info', User.getUserInfo)
+router.get('/info', auth, User.getUserInfo)
 
 module.exports = router
