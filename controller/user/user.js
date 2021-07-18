@@ -1,7 +1,7 @@
-const userCrud = require('../../models/user/user')
-const userInfoCrud = require('../../models/user-info/user-info')
-const jwt = require('../../util/jwt')
 const config = require('config-lite')
+
+const userCrud = require('../../models/user/user')
+const jwt = require('../../util/jwt')
 
 class User {
   constructor() {
@@ -12,44 +12,27 @@ class User {
   // 用户注册中间件
   async register(req, res, next) {
     let { username, password } = req.body
-    const createResult = await userCrud.create({ username, password })
-    if (createResult) {
-      res.send({
-        code: 200,
-        message: '用户注册成功!',
-      })
-    } else {
-      res.send({
-        code: 404,
-        message: '用户注册失败!',
-      })
+    try {
+      await userCrud.create({ username, password })
+      res.status(200).json({ message: '用户注册成功!' })
+    } catch (err) {
+      next(err)
     }
   }
   // 用户登录中间件
   async login(req, res, next) {
     try {
-      console.log(req.result)
-      const token = await jwt.sign(
-        {
-          userId: req.result._id,
-        },
-        config.jwtSecret,
-        { expiresIn: 60 * 60 }
-      )
-      res.status(200).json({ token })
-      // res.send({
-      //   code: 200,
-      //   data: {
-      //     token: token,
-      //   },
-      // })
-    } catch (error) {
-      next(error)
+      const token = await jwt.sign({ userId: req.result._id }, config.jwtSecret, {
+        expiresIn: config.expiresIn,
+      })
+      res.status(200).json({ token: token })
+    } catch (err) {
+      next(err)
     }
   }
   // 获取用户信息中间件
   async getUserInfo(req, res, next) {
-    res.send({ code: 20000 })
+    res.status(200).json({})
   }
 }
 

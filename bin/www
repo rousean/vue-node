@@ -5,10 +5,10 @@ const http = require('http')
 const config = require('config-lite')
 const chalk = require('chalk')
 
-const utils = require('../util/normalize-port')
 const app = require('../app')
+const normalizePort = require('../util/normalize-port')
 
-let port = utils.normalizePort(process.env.PORT || config.port)
+const port = normalizePort(process.env.PORT || config.port)
 app.set('port', port) // 设置端口
 
 const server = http.createServer(app) // 创建Create HTTP server
@@ -21,7 +21,7 @@ server.on('error', function onError(error) {
   if (error.syscall !== 'listen') {
     throw error
   }
-  var bind = typeof port === 'string' ? 'Pipe ' + port : 'Port ' + port
+  let bind = typeof port === 'string' ? 'Pipe ' + port : 'Port ' + port
   switch (error.code) {
     case 'EACCES':
       console.error(bind + ' requires elevated privileges')
@@ -37,7 +37,7 @@ server.on('error', function onError(error) {
 })
 
 server.on('listening', function onListening() {
-  var addr = server.address()
-  var bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr.port
+  let addr = server.address()
+  let bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr.port
   debug('Listening on ' + bind)
 })

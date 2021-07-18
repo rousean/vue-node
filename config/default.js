@@ -12,6 +12,7 @@ const config = {
     password: '', // 数据库密码
   },
   jwtSecret: '710867a9-855e-419c-94bf-be93fc3bbbb8',
+  expiresIn: 60 * 60,
 }
 
 module.exports = config

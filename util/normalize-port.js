@@ -1,5 +1,5 @@
 // 端口验证
-function normalizePort(val) {
+module.exports = function normalizePort(val) {
   let port = parseInt(val, 10)
   if (isNaN(port)) {
     return val
@@ -9,5 +9,3 @@ function normalizePort(val) {
   }
   return false
 }
-
-exports.normalizePort = normalizePort

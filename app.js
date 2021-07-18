@@ -1,3 +1,4 @@
+// 依赖
 const express = require('express')
 const path = require('path')
 const cookieParser = require('cookie-parser')
@@ -5,10 +6,10 @@ const logger = require('morgan')
 const cors = require('cors')
 
 // 自定义中间件
-require('./db/mongoose/mongoose')
-const notFound = require('./error/not-found')
-const error = require('./error/error')
-const router = require('./routes/index')
+const router = require('./routes/index') // 路由
+require('./db/mongoose/mongoose') // 数据库
+const notFound = require('./middleware/not-found') // 404错误
+const errorHandle = require('./middleware/error-handle') // 其他错误处理
 
 // 实例化app
 const app = express()
@@ -32,6 +33,6 @@ router(app)
 app.use(notFound)
 
 // 错误处理
-app.use(error)
+app.use(errorHandle)
 
 module.exports = app
