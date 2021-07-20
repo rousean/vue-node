@@ -13,6 +13,8 @@ const config = {
   },
   jwtSecret: '710867a9-855e-419c-94bf-be93fc3bbbb8',
   expiresIn: 60 * 60,
+  error: 0,
+  success: 1,
 }
 
 module.exports = config

@@ -14,22 +14,28 @@ class User {
     let { username, password } = req.body
     try {
       await userCrud.create({ username, password })
-      res.status(200).json({ message: '用户注册成功!' })
+      res.status(200).json({ code: config.success, message: '用户注册成功!' })
     } catch (err) {
-      next(err)
+      res.status(200).json({ code: config.error, message: '用户注册失败!' })
     }
   }
+
   // 用户登录中间件
   async login(req, res, next) {
     try {
       const token = await jwt.sign({ userId: req.result._id }, config.jwtSecret, {
         expiresIn: config.expiresIn,
       })
-      res.status(200).json({ token: token })
+      console.log(a)
+
+      res
+        .status(200)
+        .json({ code: config.success, message: '用户登录成功!', data: { token: token } })
     } catch (err) {
-      next(err)
+      res.status(200).json({ code: config.error, message: '用户登录失败!', data: { token: null } })
     }
   }
+
   // 获取用户信息中间件
   async getUserInfo(req, res, next) {
     res.status(200).json({})
