@@ -26,8 +26,6 @@ class User {
       const token = await jwt.sign({ userId: req.result._id }, config.jwtSecret, {
         expiresIn: config.expiresIn,
       })
-      console.log(a)
-
       res
         .status(200)
         .json({ code: config.success, message: '用户登录成功!', data: { token: token } })
