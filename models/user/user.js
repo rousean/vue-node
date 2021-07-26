@@ -1,11 +1,13 @@
 const mongoose = require('mongoose')
 const mongoCrud = require('../../db/mongoose/mongo-crud')
 const { myCrypt } = require('../../util/crypt')
+const baseModel = require('../base-model/base-model')
 
 const Schema = mongoose.Schema
 
 // 定义schema
 const userSchema = new Schema({
+  ...baseModel,
   username: {
     type: String,
     required: true,
