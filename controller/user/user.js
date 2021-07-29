@@ -36,7 +36,7 @@ class User {
 
   // 获取用户信息中间件
   async getUserInfo(req, res, next) {
-    res.status(200).json({})
+    res.status(200).json({ data: '成功获取' })
   }
 }
 

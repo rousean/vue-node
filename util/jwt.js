@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken')
+
 // 转换函数返回Promise
 const { promisify } = require('util')
 
