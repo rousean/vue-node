@@ -23,9 +23,11 @@ class User {
   // 用户登录中间件
   async login(req, res, next) {
     try {
-      const token = await jwt.sign({ userId: req.result._id }, config.jwtSecret, {
-        expiresIn: config.expiresIn,
-      })
+      const token =
+        'Bearer ' +
+        (await jwt.sign({ userId: req.result._id }, config.jwtSecret, {
+          expiresIn: config.expiresIn,
+        }))
       res
         .status(200)
         .json({ code: config.success, message: '用户登录成功!', data: { token: token } })
