@@ -91,7 +91,7 @@ class mongoCrud {
         } else {
           resolve(results)
         }
-      })
+      }).lean()
     })
   }
 
