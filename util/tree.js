@@ -81,15 +81,16 @@ function reduceTree(arr) {
     delete item.icon
     delete item.close_tab
     delete item.menu_level
+    delete item.__v
     if (item.parent_id === 0) {
       total.push({
         ...item,
         children: list.filter(f => f.parent_id == item._id),
       })
     } else {
-      item.children = list.filter(f => f.parent_id === item._id)
+      // item.children = list.filter(f => f.parent_id === item._id)
+      item.children = ''
     }
-
     return total
   }, [])
 }

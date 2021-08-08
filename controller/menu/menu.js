@@ -2,6 +2,7 @@ const config = require('config-lite')
 
 const menuCrud = require('../../models/menu/menu')
 const { reduceTree } = require('../../util/tree')
+
 class Menu {
   constructor() {
     this.getMenu = this.getMenu.bind(this)
