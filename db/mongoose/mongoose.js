@@ -12,7 +12,7 @@ mongoose.Promise = global.Promise
 
 let mongodb = mongoose.connection
 mongodb.once('open', () => {
-  console.log(chalk.green('连接数据库成功!'))
+  console.log(chalk.green('MongoDB 连接成功!'))
 })
 
 mongodb.on('error', function (error) {

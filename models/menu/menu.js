@@ -57,6 +57,10 @@ const menuSchema = new Schema({
     type: Number,
     default: 0,
   },
+  is_delete: {
+    type: Number,
+    default: 0,
+  },
 })
 
 // 定义model
