@@ -3,12 +3,14 @@ const router = express.Router()
 
 const Menu = require('../controller/menu/menu')
 
+const auth = require('../middleware/auth')
+
 router.get('/', function (req, res, next) {
   res.send('')
 })
 
-// 获取路由列表
-router.post('/menuList', Menu.getMenu)
+// 获取动态导航
+router.post('/menuList', auth, Menu.getMenu)
 
 // 菜单管理界面相关接口
 // 查询菜单列表

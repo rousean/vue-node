@@ -1,5 +1,6 @@
-const { verify } = require('../util/jwt')
 const config = require('config-lite')
+
+const { verify } = require('../util/jwt')
 
 const userCrud = require('../models/user/user')
 
@@ -8,7 +9,6 @@ module.exports = async (req, res, next) => {
   if (!token) {
     return res.status(401).end()
   }
-
   try {
     const decodedToken = await verify(token, config.jwtSecret)
     const userId = await userCrud.findById(decodedToken.userId)

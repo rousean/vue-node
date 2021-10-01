@@ -7,6 +7,7 @@ module.exports = validations => {
     if (errors.isEmpty()) {
       return next()
     }
+    console.log(errors.errors)
     res.status(400).json({ errors: errors.array() })
   }
 }
